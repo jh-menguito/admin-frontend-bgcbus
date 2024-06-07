@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Add Personal Information</h1>
+<div mat-dialog-content>
+    <form [formGroup]="personalForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input formControlName ="Name" matInput placeholder="Enter Name">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName ="Gender" placeholder="Select Gender">
+                    <mat-option value ="Male">Male</mat-option>
+                    <mat-option value ="Female">Female</mat-option>
+                    <mat-option value ="Non-Binary">Non-Binary</mat-option>
+                    <mat-option value ="Other">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Birthday</mat-label>
+                <input formControlName ="Birthday" matInput [matDatepicker]="picker" placeholder="Select Birthday" readonly
+                [max]="maxDate"> <!--readonly cannot enter anything-->
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input formControlName ="Email" matInput placeholder="Enter Email">
+                    <mat-error *ngIf="personalForm.get('Email')?.invalid && personalForm.get('Email')?.touched ">
+                    Please enter valid email</mat-error> <!--if invalid, this will show-->
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contact Number</mat-label>
+                        <!--<span matTextPrefix>+63 &nbsp;</span>-->
+                        <input formControlName ="Number" matInput type="number" placeholder="Enter Contact Number">
+                        </mat-form-field>
+    </form>
+</div>
+
+<div>
+    <div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button style="margin-left: 10px;" mat-raised-button color="primary" (click)="addInfo()">{{actionBtn}}</button>
+</div>
+</div>
